@@ -27,11 +27,7 @@ public class ConnectionThread extends Thread {
             String line = s.nextLine();
             String[] components = line.split(" ");
             if (components.length != 3) {
-                System.out.println("got invalid request:" + line);
-
-                wr.write("HTTP/1.1 400 Bad Request");
-                wr.write("\r\n");
-                wr.close();
+                sendError(wr, "400", "Bad Request");
                 return;
             }
             String method = components[0];
